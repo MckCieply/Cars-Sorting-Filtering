@@ -13,8 +13,14 @@ import java.util.Scanner;
 //ex. take from user model, price range, mileage range and show deals
 public class CarsProject {
     
-    public static void readRow(String f, int row){
-        BufferedReader in = null;
+    public static String[] readRow(String row){
+        String elements[] = row.split(",");
+//        String make = elements[0];
+//        String model = elements[1];
+//        int price = Integer.parseInt(elements[2]);
+//        int year = Integer.parseInt(elements[3]);
+//        int mileage = Integer.parseInt(elements[4]);
+        return elements;
     }
     public static void readFile(String f) throws IOException{
         BufferedReader in = null;
@@ -23,7 +29,7 @@ public class CarsProject {
             in = new BufferedReader(new FileReader(f));
             
             while((row = in.readLine())!= null){
-                System.out.println(row);
+                String values[] = readRow(row);
             }
         } 
         finally{
