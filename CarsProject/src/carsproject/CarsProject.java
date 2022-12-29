@@ -6,6 +6,7 @@ package carsproject;
 
 import java.io.*;
 import java.util.Scanner;
+
 //Project tasks
 //Using db or csv file
 //Use ifs and queries to properly show selected cars from menu
@@ -15,10 +16,24 @@ public class CarsProject {
     public static void readRow(String f, int row){
         BufferedReader in = null;
     }
-    public static void readFile(){
+    public static void readFile(String f) throws IOException{
+        BufferedReader in = null;
+        String row;
+        try{
+            in = new BufferedReader(new FileReader(f));
+            
+            while((row = in.readLine())!= null){
+                System.out.println(row);
+            }
+        } 
+        finally{
+            if(in != null) 
+                in.close();
+        }
+        
         
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scann = new Scanner(System.in);
         System.out.print("Wybierz na podstawie jakiego modelu szukasz danych:\n"
                 + "1. Volkswagen Scirocco\n"
@@ -38,8 +53,9 @@ public class CarsProject {
             int priceTo = scann.nextInt();
         }
         else{
-            System.out.print("Pomijamy widelki cenowe...");
+            System.out.print("Pomijamy widelki cenowe...\n");
         }
+        
         System.out.print("Z przebiegiem...\n"
                 + "Od: ");
         int mileageFrom = scann.nextInt();
@@ -47,6 +63,7 @@ public class CarsProject {
             System.out.print("Do: ");
             int mileageTo = scann.nextInt();
         }
+        readFile("cars.txt");
     }
     
 }
