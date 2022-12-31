@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class CarsProject {
     
     static Scanner scann = new Scanner(System.in);
-    
+    //Pytanie jakie modele wyswietlic
     public static int userInputModel(){
         int inModel = 0;
         System.out.print("Wybierz na podstawie jakiego modelu szukasz danych:\n"
@@ -24,54 +24,65 @@ public class CarsProject {
                 + "4. Wszystkie\n");
         do{
             System.out.print(">>> ");
+            // Sprawdzanie czy uzytkownik wprowadzil poprawne dane
+            // try czy wprowadzil cyfre
             try{ 
                 inModel = scann.nextInt();
+                //Sprawdzanie czy liczba odpowiada pozycji w menu
                 if (!(inModel > 0 && inModel < 5)){
                     System.out.println("Cos sie nie zgadza, sprobuj jeszcze raz \n"
                             + "Pamietaj, nalezy podac liczbe odpowiadajacej pozycji w menu");
                 }
             }
+            // catch jak wprowadzil znak inny od cyfry oraz czyszczenie \n uzywajac nextLine
             catch(java.util.InputMismatchException e){
                 System.out.print("Podany zostal znak inny niz liczba\n "
                         + "Prosze podac liczbe\n");
                 scann.nextLine();
             }
         }
+        //Wykonywanie az uzytkownik nie poda liczby w zakresie 1-4
         while(!(inModel > 0 && inModel < 5));
         return inModel;
     }
+    //Pytanie o zakres cenowy modeli
     public static int[] userInputPriceRange(){
-        int priceFrom, priceTo = 0;
+        int priceFrom, priceTo;
         int prices[] = new int [2];
         System.out.print("Interesuja mnie modele... \n"
                 + "Jeśli jest to nieistotne prosze wpisać 0\n"
                 + "w zasiegu cenowym \n");
         do{
+            //Sprawdzanie czy uzytkownik wprowadzil poprawne dane
             System.out.print("Od: \n>>> ");
             priceFrom = scann.nextInt();
             prices[0] = priceFrom;
             if (priceFrom != 0){
                 System.out.print("Do: \n>>> ");
                 priceTo = scann.nextInt();
+                //Sprawdzenie czy jest poprawny zakres
                 if (priceTo < priceFrom){
                     System.out.print("Niepoprawny przedzial cenowy\n");
                     priceFrom = -1;
                 }
                 else{
-                    prices[1] = priceTo;
+                    prices[1] = 0;
                 }
             }
+            //Jesli zostalo podane zero, pominiecie widelek
             else if(priceFrom == 0){
                 System.out.print("Pomijanie widelek cenowych...\n");
             }
         }while(!(priceFrom >= 0));
         return prices;
     }
+    //Pytanie o zakres przebiegu modeli
     public static int[] userInputMilRange(){
         int mileageFrom ,mileageTo;
         int mileages[] = new int [2];
         System.out.print("Z przebiegiem...\n");
         do{
+            //Sprawdzanie czy uzytkownik wprowadzil poprawne dane
             System.out.print("Od: \n>>> ");
             mileageFrom = scann.nextInt();
             mileages[0] = mileageFrom;
@@ -79,11 +90,13 @@ public class CarsProject {
                 System.out.print("Do: \n>>> ");
                 mileageTo = scann.nextInt();
                 mileages[1] = mileageTo;
+                //Sprawdzanie czy zakres jest poprawny
                 if (mileageTo < mileageFrom){
                     System.out.print("Niepoprawny przedzial przebiegu\n");
                     mileageFrom = -1;
                 }
             }
+            //Jesli zostalo podane 0 to pomijanie
             else if (mileageFrom == 0){
                 System.out.print("Pomijanie widelek przebiegu...");
                 mileages[1] = 0;
