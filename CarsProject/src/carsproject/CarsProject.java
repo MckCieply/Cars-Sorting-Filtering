@@ -62,7 +62,8 @@ public class CarsProject {
             }
             catch(java.util.InputMismatchException e){
                 System.out.print("Podany zostal znak inny niz liczba\n "
-                        + "Prosze podac liczbe");
+                        + "Prosze podac liczbe\n");
+                scann.nextLine();
             }
         }
         while(!(inModel > 0 && inModel < 5));
