@@ -13,6 +13,80 @@ import java.util.Scanner;
 //ex. take from user model, price range, mileage range and show deals
 public class CarsProject {
     
+    static Scanner scann = new Scanner(System.in);
+    
+    public static int userInputModel(){
+        int inModel = 0;
+        System.out.print("Wybierz na podstawie jakiego modelu szukasz danych:\n"
+                + "1. Volkswagen Scirocco\n"
+                + "2. Mitsubishi Lancer\n"
+                + "3. Volvo c30\n"
+                + "4. Wszystkie\n");
+        do{
+            System.out.print(">>> ");
+            try{ 
+                inModel = scann.nextInt();
+                if (!(inModel > 0 && inModel < 5)){
+                    System.out.println("Cos sie nie zgadza, sprobuj jeszcze raz \n"
+                            + "Pamietaj, nalezy podac liczbe odpowiadajacej pozycji w menu");
+                }
+            }
+            catch(java.util.InputMismatchException e){
+                System.out.print("Podany zostal znak inny niz liczba\n "
+                        + "Prosze podac liczbe\n");
+                scann.nextLine();
+            }
+        }
+        while(!(inModel > 0 && inModel < 5));
+        return inModel;
+    }
+    public static int[] userInputPriceRange(){
+        int priceFrom, priceTo = 0;
+        int prices[] = new int [2];
+        System.out.print("Interesuja mnie modele... \n"
+                + "Jeśli jest to nieistotne prosze wpisać 0\n"
+                + "w zasiegu cenowym \n");
+        do{
+            System.out.print("Od: \n>>> ");
+            priceFrom = scann.nextInt();
+            prices[0] = priceFrom;
+            if (priceFrom != 0){
+                System.out.print("Do: \n>>> ");
+                priceTo = scann.nextInt();
+                if (priceTo < priceFrom){
+                    System.out.print("Niepoprawny przedzial cenowy\n");
+                    priceFrom = -1;
+                }
+                else{
+                    prices[1] = priceTo;
+                }
+            }
+            else if(priceFrom == 0){
+                System.out.print("Pomijanie widelek cenowych...\n");
+            }
+        }while(!(priceFrom >= 0));
+        return prices;
+    }
+    public static int[] userInputMilRange(){
+        int mileageFrom ,mileageTo;
+        int mileages[] = new int [2];
+        System.out.print("Z przebiegiem...\n"
+                + "Od: ");
+        do{
+            mileageFrom = scann.nextInt();
+            mileages[0] = mileageFrom;
+            if (mileageFrom != 0){
+                System.out.print("Do: \n>>> ");
+                mileageTo = scann.nextInt();
+                mileageTo = mileages[1];
+            }
+            else if (mileageFrom == 0){
+                System.out.print("Pomijanie widelek przebiegu...");
+                mileages[1] = 0;
+        }
+        }while(!(mileageFrom >= 0));
+        return mileages;
+    }
     public static void getResults(String make){
         
     }
@@ -44,55 +118,10 @@ public class CarsProject {
         
     }
     public static void main(String[] args) throws IOException {
-        int inModel = 0, priceFrom, priceTo, mileageFrom, mileageTo;
-        Scanner scann = new Scanner(System.in);
-        System.out.print("Wybierz na podstawie jakiego modelu szukasz danych:\n"
-                + "1. Volkswagen Scirocco\n"
-                + "2. Mitsubishi Lancer\n"
-                + "3. Volvo c30\n"
-                + "4. Wszystkie\n");
-        do{
-            System.out.print(">>> ");
-            try{ 
-                inModel = scann.nextInt();
-                if (!(inModel > 0 && inModel < 5)){
-                    System.out.println("Cos sie nie zgadza, sprobuj jeszcze raz \n"
-                            + "Pamietaj, nalezy podac liczbe odpowiadajacej pozycji w menu");
-                }
-            }
-            catch(java.util.InputMismatchException e){
-                System.out.print("Podany zostal znak inny niz liczba\n "
-                        + "Prosze podac liczbe\n");
-                scann.nextLine();
-            }
-        }
-        while(!(inModel > 0 && inModel < 5));
-            
-        
-        System.out.print("Interesuja mnie modele... \n"
-                + "Jeśli jest to nieistotne prosze wpisać 0\n"
-                + "w zasiegu cenowym \n"
-                + "Od: ");
-        do{
-            System.out.print(">>> ");
-            priceFrom = scann.nextInt();
-            if (priceFrom != 0){
-                System.out.print("Do: ");
-                priceTo = scann.nextInt();
-            }
-            else{
-                System.out.print("Pomijamy widelki cenowe...\n");
-            }
-        }while(!(priceFrom >= 0));
-        
-        System.out.print("Z przebiegiem...\n"
-                + "Od: ");
-        mileageFrom = scann.nextInt();
-        if (mileageFrom != 0){
-            System.out.print("Do: ");
-            mileageTo = scann.nextInt();
-        }
-        readFile("cars.txt");
+        int result[] = userInputPriceRange();
+        for(int element: result)
+        System.out.println(element);
+        //readFile("cars.txt");
     }
     
 }
