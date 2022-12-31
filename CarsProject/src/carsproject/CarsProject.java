@@ -70,15 +70,19 @@ public class CarsProject {
     public static int[] userInputMilRange(){
         int mileageFrom ,mileageTo;
         int mileages[] = new int [2];
-        System.out.print("Z przebiegiem...\n"
-                + "Od: ");
+        System.out.print("Z przebiegiem...\n");
         do{
+            System.out.print("Od: \n>>> ");
             mileageFrom = scann.nextInt();
             mileages[0] = mileageFrom;
             if (mileageFrom != 0){
                 System.out.print("Do: \n>>> ");
                 mileageTo = scann.nextInt();
-                mileageTo = mileages[1];
+                mileages[1] = mileageTo;
+                if (mileageTo < mileageFrom){
+                    System.out.print("Niepoprawny przedzial przebiegu\n");
+                    mileageFrom = -1;
+                }
             }
             else if (mileageFrom == 0){
                 System.out.print("Pomijanie widelek przebiegu...");
@@ -118,9 +122,15 @@ public class CarsProject {
         
     }
     public static void main(String[] args) throws IOException {
-        int result[] = userInputPriceRange();
-        for(int element: result)
+        int prices[] = userInputPriceRange();
+        for(int element: prices){
         System.out.println(element);
+        }
+        
+        int mileages[] = userInputMilRange();
+        for(int element: mileages){
+        System.out.println(element);
+        }
         //readFile("cars.txt");
     }
     
