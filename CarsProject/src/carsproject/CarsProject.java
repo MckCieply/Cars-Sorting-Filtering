@@ -47,7 +47,7 @@ public class CarsProject {
     }
     //Pytanie o zakres cenowy modeli
     public static int[] userInputPriceRange(){
-        int priceFrom, priceTo;
+        int priceFrom = -1, priceTo;
         int prices[] = new int [2];
         System.out.print("Interesuja mnie modele... \n"
                 + "Jeśli jest to nieistotne prosze wpisać 0\n"
@@ -55,23 +55,34 @@ public class CarsProject {
         do{
             //Sprawdzanie czy uzytkownik wprowadzil poprawne dane
             System.out.print("Od: \n>>> ");
-            priceFrom = scann.nextInt();
-            prices[0] = priceFrom;
-            if (priceFrom != 0){
-                System.out.print("Do: \n>>> ");
-                priceTo = scann.nextInt();
-                //Sprawdzenie czy jest poprawny zakres
-                if (priceTo < priceFrom){
-                    System.out.print("Niepoprawny przedzial cenowy\n");
-                    priceFrom = -1;
+            try{
+                priceFrom = scann.nextInt();
+                prices[0] = priceFrom;
+                if (priceFrom != 0){
+                    System.out.print("Do: \n>>> ");
+                    priceTo = scann.nextInt();
+                    //Sprawdzenie czy jest poprawny zakres
+                    if (priceTo < priceFrom){
+                        System.out.print("Niepoprawny przedzial cenowy\n");
+                        priceFrom = -1;
+                    }
+                    else{
+                        prices[1] = 0;
+                    }
                 }
-                else{
-                    prices[1] = 0;
-                }
+                //Jesli zostalo podane zero, pominiecie widelek
+                else if(priceFrom == 0){
+                    System.out.print("Pomijanie widelek cenowych...\n");
+                }        
             }
-            //Jesli zostalo podane zero, pominiecie widelek
-            else if(priceFrom == 0){
-                System.out.print("Pomijanie widelek cenowych...\n");
+            //catch jak nie jest to cyfra, i czyszczenie \n z wejścia
+        catch(java.util.InputMismatchException e){
+            System.out.print("Podany zostal znak inny niz liczba\n "
+                    + "Prosze podac liczbe\n");
+            scann.nextLine();
+            // Przypisywanie -1 obu zmiennym zeby przy drugim podejsciu nie czytalo starych danych
+            // -1 jest nasza wartoscia domyslna, poniewaz 0 ma zastosowanie w programie
+            priceFrom = priceTo = -1;
             }
         }while(!(priceFrom >= 0));
         return prices;
