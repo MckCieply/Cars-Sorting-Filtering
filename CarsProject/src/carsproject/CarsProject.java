@@ -36,7 +36,7 @@ public class CarsProject {
             }
             // catch jak wprowadzil znak inny od cyfry oraz czyszczenie \n uzywajac nextLine
             catch(java.util.InputMismatchException e){
-                System.out.print("Podany zostal znak inny niz liczba\n "
+                System.out.print("Podany zostal znak inny niz liczba\n"
                         + "Prosze podac liczbe\n");
                 scann.nextLine();
             }
@@ -95,23 +95,33 @@ public class CarsProject {
         do{
             //Sprawdzanie czy uzytkownik wprowadzil poprawne dane
             System.out.print("Od: \n>>> ");
-            mileageFrom = scann.nextInt();
-            mileages[0] = mileageFrom;
-            if (mileageFrom != 0){
-                System.out.print("Do: \n>>> ");
-                mileageTo = scann.nextInt();
-                mileages[1] = mileageTo;
-                //Sprawdzanie czy zakres jest poprawny
-                if (mileageTo < mileageFrom){
-                    System.out.print("Niepoprawny przedzial przebiegu\n");
-                    mileageFrom = -1;
+            try{
+                mileageFrom = scann.nextInt();
+                mileages[0] = mileageFrom;
+                if (mileageFrom != 0){
+                    System.out.print("Do: \n>>> ");
+                    mileageTo = scann.nextInt();
+                    mileages[1] = mileageTo;
+                    //Sprawdzanie czy zakres jest poprawny
+                    if (mileageTo < mileageFrom){
+                        System.out.print("Niepoprawny przedzial przebiegu\n");
+                        mileageFrom = -1;
+                    }
+                }
+                //Jesli zostalo podane 0 to pomijanie
+                else if (mileageFrom == 0){
+                    System.out.print("Pomijanie widelek przebiegu...");
+                    mileages[1] = 0;
                 }
             }
-            //Jesli zostalo podane 0 to pomijanie
-            else if (mileageFrom == 0){
-                System.out.print("Pomijanie widelek przebiegu...");
-                mileages[1] = 0;
-        }
+            //Catch dla wprowadzonego znaku innego niz liczba oraz przypisane wartosci
+            //gwarantujacej kolejny przebieg
+            catch(java.util.InputMismatchException e){
+                System.out.print("Podany zostal znak inny niz liczba\n"
+                        + "Prosze podac liczbe\n");
+                scann.nextLine();
+                mileageFrom = mileageTo = -1;
+            }
         }while(!(mileageFrom >= 0));
         return mileages;
     }
