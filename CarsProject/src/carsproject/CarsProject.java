@@ -125,6 +125,14 @@ public class CarsProject {
         }while(!(mileageFrom >= 0));
         return mileages;
     }
+    // Metoda wezmie model, zakres cenowy oraz zakres przebiegu do wyswietlenia
+    public static void summary(){
+        System.out.print("\n-------------------------------\n"
+                + "Podsumowanie wprowadzonych danych\n\n"
+                + "Model: \n"
+                + "Cena: \n"
+                + "Przebieg: \n");
+    }
     public static void getResults(String make){
         
     }
