@@ -46,6 +46,18 @@ public class CarsProject {
         return inModel;
     }
     //Pytanie o zakres cenowy modeli
+    public static String convertModel(int model){
+        String name;
+        if(model == 1)
+            name = "VW Scirocco";
+        else if(model == 2)
+            name = "Mitsubishi Lancer";
+        else if(model == 3)
+            name = "Volvo c30";
+        else
+            name = "Wszystkie";
+        return name;
+    }
     public static int[] userInputPriceRange(){
         int priceFrom = -1, priceTo;
         int prices[] = new int [2];
@@ -127,16 +139,7 @@ public class CarsProject {
         return mileages;
     }
     // Metoda wezmie model, zakres cenowy oraz zakres przebiegu do wyswietlenia
-    public static void summary(int model, int prices[], int mileages[]){
-        String name;
-        if(model == 1)
-            name = "VW Scirocco";
-        else if(model == 2)
-            name = "Mitsubishi Lancer";
-        else if(model == 3)
-            name = "Volvo c30";
-        else
-            name = "Wszystkie";
+    public static void summary(String name, int prices[], int mileages[]){
         System.out.printf("\n-------------------------------\n"
         + "Podsumowanie wprowadzonych danych\n\n"
         + "Model: %s\n", name);
@@ -150,10 +153,6 @@ public class CarsProject {
             System.out.printf("Przebieg: %dkm - %dkm\n", mileages[0], mileages[1]);
         System.out.print("-------------------------------\n");
     }
-    public static void getResults(String make){
-        
-    }
-    
     public static String[] readRow(String row){
         String elements[] = row.split(",");
         String make = elements[0];
@@ -163,30 +162,34 @@ public class CarsProject {
         int mileage = Integer.parseInt(elements[4]);
         return 0;
     }
-    public static void readFile(String f) throws IOException{
+    public static String[] readFile(String f) throws IOException{
         BufferedReader in = null;
         String row;
+        String values[] = null;
         try{
             in = new BufferedReader(new FileReader(f));
             
             while((row = in.readLine())!= null){
-                //String values[] = readRow(row);
+                values = row.split(",");
             }
         } 
         finally{
             if(in != null) 
                 in.close();
         }
-        
+        return values;
+    }
+    public static void ifCondition(int inModel,int prices[],int mileages[], String txtData[]){
         
     }
     public static void main(String[] args) throws IOException {
-        int inModel = userInputModel();
-        int prices[] = userInputPriceRange();
-        int mileages[] = userInputMilRange();
-        summary(inModel, prices, mileages);
+        //int inModel = userInputModel();
+        //String inModelName = convertModel(inModel);
+        //int prices[] = userInputPriceRange();
+        //int mileages[] = userInputMilRange();
+        //summary(inModelName, prices, mileages);
         
-        //readFile("cars.txt");
+        //String data[] = readFile("cars.txt");
     }
     
 }
