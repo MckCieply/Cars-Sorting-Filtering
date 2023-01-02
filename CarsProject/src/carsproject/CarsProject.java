@@ -72,6 +72,7 @@ public class CarsProject {
                 }
                 //Jesli zostalo podane zero, pominiecie widelek
                 else if(priceFrom == 0){
+                    prices[0] = prices[1] = 0;
                     System.out.print("Pomijanie widelek cenowych...\n");
                 }        
             }
@@ -111,7 +112,7 @@ public class CarsProject {
                 //Jesli zostalo podane 0 to pomijanie
                 else if (mileageFrom == 0){
                     System.out.print("Pomijanie widelek przebiegu...");
-                    mileages[1] = 0;
+                    mileages[0] = mileages[1] = 0;
                 }
             }
             //Catch dla wprowadzonego znaku innego niz liczba oraz przypisane wartosci
@@ -137,12 +138,17 @@ public class CarsProject {
         else
             name = "Wszystkie";
         System.out.printf("\n-------------------------------\n"
-                + "Podsumowanie wprowadzonych danych\n\n"
-                + "Model: %s\n"
-                + "Cena:  %dPLN - %dPLN\n"
-                + "Przebieg: %dkm - %dkm\n"
-                + "-------------------------------\n",
-                name, prices[0], prices[1], mileages[0], mileages[1]);
+        + "Podsumowanie wprowadzonych danych\n\n"
+        + "Model: %s\n", name);
+        if(prices[0] == 0 && prices[1] == 0)
+            System.out.print("Cena: Dowolna\n");
+        else
+            System.out.printf("Cena:  %dPLN - %dPLN\n", prices[0], prices[1]);
+        if(mileages[0] == 0 && mileages[1] == 0)
+            System.out.print("Przebieg: Dowolny\n");
+        else
+            System.out.printf("Przebieg: %dkm - %dkm\n", mileages[0], mileages[1]);
+        System.out.print("-------------------------------\n");
     }
     public static void getResults(String make){
         
