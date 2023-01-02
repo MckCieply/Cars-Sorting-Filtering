@@ -67,7 +67,7 @@ public class CarsProject {
                         priceFrom = -1;
                     }
                     else{
-                        prices[1] = 0;
+                        prices[1] = priceTo;
                     }
                 }
                 //Jesli zostalo podane zero, pominiecie widelek
@@ -126,12 +126,23 @@ public class CarsProject {
         return mileages;
     }
     // Metoda wezmie model, zakres cenowy oraz zakres przebiegu do wyswietlenia
-    public static void summary(){
-        System.out.print("\n-------------------------------\n"
+    public static void summary(int model, int prices[], int mileages[]){
+        String name;
+        if(model == 1)
+            name = "VW Scirocco";
+        else if(model == 2)
+            name = "Mitsubishi Lancer";
+        else if(model == 3)
+            name = "Volvo c30";
+        else
+            name = "Wszystkie";
+        System.out.printf("\n-------------------------------\n"
                 + "Podsumowanie wprowadzonych danych\n\n"
-                + "Model: \n"
-                + "Cena: \n"
-                + "Przebieg: \n");
+                + "Model: %s\n"
+                + "Cena:  %dPLN - %dPLN\n"
+                + "Przebieg: %dkm - %dkm\n"
+                + "-------------------------------\n",
+                name, prices[0], prices[1], mileages[0], mileages[1]);
     }
     public static void getResults(String make){
         
@@ -164,15 +175,11 @@ public class CarsProject {
         
     }
     public static void main(String[] args) throws IOException {
+        int inModel = userInputModel();
         int prices[] = userInputPriceRange();
-        for(int element: prices){
-        System.out.println(element);
-        }
-        
         int mileages[] = userInputMilRange();
-        for(int element: mileages){
-        System.out.println(element);
-        }
+        summary(inModel, prices, mileages);
+        
         //readFile("cars.txt");
     }
     
