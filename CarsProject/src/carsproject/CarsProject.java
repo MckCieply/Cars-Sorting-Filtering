@@ -45,7 +45,7 @@ public class CarsProject {
         while(!(inModel > 0 && inModel < 5));
         return inModel;
     }
-    //Pytanie o zakres cenowy modeli
+    //Przypisane wyborowi uzytkownika poprawnego modelu
     public static String convertModel(int model){
         String name;
         if(model == 1)
@@ -58,6 +58,7 @@ public class CarsProject {
             name = "Wszystkie";
         return name;
     }
+    //Pytanie o zakres cenowy modeli
     public static int[] userInputPriceRange(){
         int priceFrom = -1, priceTo;
         int prices[] = new int [2];
@@ -162,22 +163,30 @@ public class CarsProject {
         int mileage = Integer.parseInt(elements[4]);
         return 0;
     }
-    public static String[] readFile(String f) throws IOException{
+    //Osobne otwarcie pliku do sprawdzenia ile rekordow w nim jest
+    public static int howMuchRows(String f) throws IOException{
         BufferedReader in = null;
         String row;
-        String values[] = null;
+        int counter = 0;
         try{
             in = new BufferedReader(new FileReader(f));
             
             while((row = in.readLine())!= null){
-                values = row.split(",");
+                counter +=1;
+                }
             }
-        } 
         finally{
             if(in != null) 
                 in.close();
         }
-        return values;
+        return counter;
+    }
+    public static String[][] readFile(String f) throws IOException{
+        BufferedReader in = null;
+        String row;
+        String results[][] = new String[howMuchRows("cars.txt")][6];
+        String values[] = null;
+        
     }
     public static void ifCondition(int inModel,int prices[],int mileages[], String txtData[]){
         
@@ -189,7 +198,8 @@ public class CarsProject {
         //int mileages[] = userInputMilRange();
         //summary(inModelName, prices, mileages);
         
-        //String data[] = readFile("cars.txt");
+        String data[][] = readFile("cars.txt");
+        //for(String element:data){
+        //    System.out.println(element);
+        }
     }
-    
-}
