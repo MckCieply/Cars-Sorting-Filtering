@@ -154,14 +154,13 @@ public class CarsProject {
             System.out.printf("Przebieg: %dkm - %dkm\n", mileages[0], mileages[1]);
         System.out.print("-------------------------------\n");
     }
-    public static String[] readRow(String row){
+    public static void readRow(String row){
         String elements[] = row.split(",");
         String make = elements[0];
         String model = elements[1];
         int price = Integer.parseInt(elements[2]);
         int year = Integer.parseInt(elements[3]);
         int mileage = Integer.parseInt(elements[4]);
-        return 0;
     }
     //Osobne otwarcie pliku do sprawdzenia ile rekordow w nim jest
     public static int howMuchRows(String f) throws IOException{
@@ -218,3 +217,7 @@ public class CarsProject {
         String data[][] = readFile("cars.txt");
         }
     }
+//Ważny sposób na optymalizacje -> nie tworzyć 2dim listy z wszystkimi dealami tylko po to
+//żeby potem stworzyć nową 2dim liste tylko z dealami spełniającymi wymagania
+//możnaby wziąć każdy row(result) i w pętli wywoływać funkcje sprawdzającą czy pasuje do kryterii
+//jeśli tak to wtedy dopiero dodać do 2dim listy
