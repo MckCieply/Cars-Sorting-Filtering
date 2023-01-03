@@ -181,15 +181,32 @@ public class CarsProject {
         }
         return counter;
     }
+    //Stworzenie 'dwuwymiarowej' tablicy ktora w kazdym wierszu zawiera 6 komórek z danymi
+    //Z pliku tekstowego
     public static String[][] readFile(String f) throws IOException{
         BufferedReader in = null;
         String row;
         String results[][] = new String[howMuchRows("cars.txt")][6];
         String values[] = null;
-        
-    }
-    public static void ifCondition(int inModel,int prices[],int mileages[], String txtData[]){
-        
+        try{
+            in = new BufferedReader(new FileReader(f));
+            
+            int i=0;
+            while((row = in.readLine())!= null){
+                values = row.split(",");
+                for(int j=0; j<values.length; j++ ){
+                    results[i][j] = values[j];
+                    //System.out.print(results[i][j] + " ");
+                }
+                //System.out.println();
+                i += 1;
+            }
+        } 
+        finally{
+            if(in != null) 
+                in.close();
+        }
+        return results;
     }
     public static void main(String[] args) throws IOException {
         //int inModel = userInputModel();
@@ -199,7 +216,5 @@ public class CarsProject {
         //summary(inModelName, prices, mileages);
         
         String data[][] = readFile("cars.txt");
-        //for(String element:data){
-        //    System.out.println(element);
         }
     }
