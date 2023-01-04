@@ -156,11 +156,16 @@ public class CarsProject {
     }
     public static void readRow(String row){
         String elements[] = row.split(",");
-        String make = elements[0];
-        String model = elements[1];
-        int price = Integer.parseInt(elements[2]);
-        int year = Integer.parseInt(elements[3]);
-        int mileage = Integer.parseInt(elements[4]);
+        String model = elements[2];
+        int numName = 0;
+        int price = Integer.parseInt(elements[3]);
+        int mileage = Integer.parseInt(elements[5]);
+        if(model.equals("Scirocco"))
+            numName = 1;
+        else if(model.equals("Lancer"))
+            numName = 2;
+        else if(model.equals("c30"))
+            numName = 3;
     }
     //Osobne otwarcie pliku do sprawdzenia ile rekordow w nim jest
     public static int howMuchRows(String f) throws IOException{
@@ -192,6 +197,7 @@ public class CarsProject {
             
             int i=0;
             while((row = in.readLine())!= null){
+                readRow(row);
                 values = row.split(",");
                 for(int j=0; j<values.length; j++ ){
                     results[i][j] = values[j];
