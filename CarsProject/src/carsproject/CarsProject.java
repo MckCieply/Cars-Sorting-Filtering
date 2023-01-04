@@ -154,19 +154,27 @@ public class CarsProject {
             System.out.printf("Przebieg: %dkm - %dkm\n", mileages[0], mileages[1]);
         System.out.print("-------------------------------\n");
     }
-    public static void readRow(String row){
+    public static void readRow(String row,  int inputName, int prices[], int mileages[]){
         String elements[] = row.split(",");
         String model = elements[2];
-        int numName = 0;
+        int txtName = 0;
         int price = Integer.parseInt(elements[3]);
         int mileage = Integer.parseInt(elements[5]);
         if(model.equals("Scirocco"))
-            numName = 1;
+            txtName = 1;
         else if(model.equals("Lancer"))
-            numName = 2;
+            txtName = 2;
         else if(model.equals("c30"))
-            numName = 3;
-    }
+            txtName = 3;
+        
+        if(txtName == inputName){
+            if(price > prices[0] && price < prices[1]){
+                if(mileage > mileages[0] && mileage < mileages[1]){
+                    System.out.println(model + " " + price +" PLN " + mileage + "km");
+                }
+            }
+        }
+    }  
     //Osobne otwarcie pliku do sprawdzenia ile rekordow w nim jest
     public static int howMuchRows(String f) throws IOException{
         BufferedReader in = null;
@@ -187,7 +195,7 @@ public class CarsProject {
     }
     //Stworzenie 'dwuwymiarowej' tablicy ktora w kazdym wierszu zawiera 6 komórek z danymi
     //Z pliku tekstowego
-    public static String[][] readFile(String f) throws IOException{
+    public static String[][] readFile(String f, int inModel, int prices[], int mileages[]) throws IOException{
         BufferedReader in = null;
         String row;
         String results[][] = new String[howMuchRows("cars.txt")][6];
@@ -197,7 +205,7 @@ public class CarsProject {
             
             int i=0;
             while((row = in.readLine())!= null){
-                readRow(row);
+                readRow(row, inModel, prices, mileages);
                 values = row.split(",");
                 for(int j=0; j<values.length; j++ ){
                     results[i][j] = values[j];
@@ -214,13 +222,13 @@ public class CarsProject {
         return results;
     }
     public static void main(String[] args) throws IOException {
-        //int inModel = userInputModel();
-        //String inModelName = convertModel(inModel);
-        //int prices[] = userInputPriceRange();
-        //int mileages[] = userInputMilRange();
-        //summary(inModelName, prices, mileages);
+        int inModel = userInputModel();
+        String inModelName = convertModel(inModel);
+        int prices[] = userInputPriceRange();
+        int mileages[] = userInputMilRange();
+        summary(inModelName, prices, mileages);
         
-        String data[][] = readFile("cars.txt");
+        String data[][] = readFile("cars.txt", inModel, prices, mileages);
         }
     }
 //Ważny sposób na optymalizacje -> nie tworzyć 2dim listy z wszystkimi dealami tylko po to
