@@ -124,7 +124,7 @@ public class CarsProject {
                 }
                 //Jesli zostalo podane 0 to pomijanie
                 else if (mileageFrom == 0){
-                    System.out.print("Pomijanie widelek przebiegu...");
+                    System.out.print("Pomijanie widelek przebiegu...\n");
                     mileages[0] = mileages[1] = 0;
                 }
             }
@@ -156,9 +156,12 @@ public class CarsProject {
     }
     public static void ifCondition(String row,  int inputName, int prices[], int mileages[]){
         String elements[] = row.split(",");
+        //int id = Integer.parseInt(elements[0]);
+        String brand = elements[1];
         String model = elements[2];
         int txtName = 0;
         int price = Integer.parseInt(elements[3]);
+        int year = Integer.parseInt(elements[4]);
         int mileage = Integer.parseInt(elements[5]);
         if(model.equals("Scirocco"))
             txtName = 1;
@@ -179,7 +182,8 @@ public class CarsProject {
                 System.out.println(model + " " + price +" PLN " + mileage + "km");
 
             else if(mileages[0] == 0 && prices[0] == 0)
-                System.out.println(model + " " + price +" PLN " + mileage + "km");
+                //System.out.println(model + " " + price +" PLN " + mileage + "km");
+                printOut(brand, model, year, price, mileage);
         }
     }  
     public static void readFile(String f, int inModel, int prices[], int mileages[]) throws IOException{
@@ -197,17 +201,21 @@ public class CarsProject {
                 in.close();
         }
     }
+    public static void printOut(String brand, String model, int year, int price, int mileage){
+        String format = "| %-11s| %-9s| %-9d| %-6dPLN | %-6dkm |\n";
+        //Brand min. 12 places, Model min 8 places, year 4, price 6places + PLN, mileage 6places +km
+        System.out.printf(format, brand, model, year, price, mileage);
+    }
     public static void main(String[] args) throws IOException {
         int inModel = userInputModel();
-        String inModelName = convertModel(inModel);
+        //String inModelName = convertModel(inModel);
         int prices[] = userInputPriceRange();
         int mileages[] = userInputMilRange();
-        summary(inModelName, prices, mileages);
-        
+        //summary(inModelName, prices, mileages);
+        System.out.printf("+------------+----------+----------+---------- +----------+\n");
+        System.out.printf("| Marka      | Model    | Rok prod | Cena      | Przebieg |\n");
+        System.out.printf("+------------+----------+----------+---------- +----------+\n");
         readFile("cars.txt", inModel, prices, mileages);
+        System.out.printf("+------------+----------+----------+-----------+----------+\n");
         }
     }
-//Ważny sposób na optymalizacje -> nie tworzyć 2dim listy z wszystkimi dealami tylko po to
-//żeby potem stworzyć nową 2dim liste tylko z dealami spełniającymi wymagania
-//możnaby wziąć każdy row(result) i w pętli wywoływać funkcje sprawdzającą czy pasuje do kryterii
-//jeśli tak to wtedy dopiero dodać do 2dim listy
