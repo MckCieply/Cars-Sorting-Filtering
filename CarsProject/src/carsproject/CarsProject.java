@@ -166,13 +166,20 @@ public class CarsProject {
             txtName = 2;
         else if(model.equals("c30"))
             txtName = 3;
-        
-        if(txtName == inputName){
-            if(price > prices[0] && price < prices[1]){
-                if(mileage > mileages[0] && mileage < mileages[1]){
+        // Sprawdzanie tylko prices/mileages[0] poniewaz druga pozycja musi byc 0 jak pierwsza jest 0
+        if(txtName == inputName || inputName == 4){
+            if(price >= prices[0] && price <= prices[1] && prices[0] != 0 &&
+               mileage >= mileages[0] && mileage <= mileages[1] && mileages[0] != 0)
                     System.out.println(model + " " + price +" PLN " + mileage + "km");
-                }
-            }
+            
+            else if(prices[0] == 0 && mileage >= mileages[0] && mileage <= mileages[1] && mileages[0] != 0)
+                    System.out.println(model + " " + price +" PLN " + mileage + "km");
+            
+            else if(mileages[0] == 0 && price >= prices[0] && price <= prices[1] && prices[0] != 0)
+                System.out.println(model + " " + price +" PLN " + mileage + "km");
+
+            else if(mileages[0] == 0 && prices[0] == 0)
+                System.out.println(model + " " + price +" PLN " + mileage + "km");
         }
     }  
     public static void readFile(String f, int inModel, int prices[], int mileages[]) throws IOException{
