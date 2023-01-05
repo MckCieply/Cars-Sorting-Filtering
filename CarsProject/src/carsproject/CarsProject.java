@@ -45,19 +45,6 @@ public class CarsProject {
         while(!(inModel > 0 && inModel < 5));
         return inModel;
     }
-    //Przypisane wyborowi uzytkownika poprawnego modelu
-    public static String convertModel(int model){
-        String name;
-        if(model == 1)
-            name = "VW Scirocco";
-        else if(model == 2)
-            name = "Mitsubishi Lancer";
-        else if(model == 3)
-            name = "Volvo c30";
-        else
-            name = "Wszystkie";
-        return name;
-    }
     //Pytanie o zakres cenowy modeli
     public static int[] userInputPriceRange(){
         int priceFrom = -1, priceTo;
@@ -140,7 +127,16 @@ public class CarsProject {
         return mileages;
     }
     // Metoda wezmie model, zakres cenowy oraz zakres przebiegu do wyswietlenia
-    public static void summary(String name, int prices[], int mileages[]){
+    public static void summary(int model, int prices[], int mileages[]){
+        String name;
+        if(model == 1)
+            name = "VW Scirocco";
+        else if(model == 2)
+            name = "Mitsubishi Lancer";
+        else if(model == 3)
+            name = "Volvo c30";
+        else
+            name = "Wszystkie";
         System.out.printf("\n-------------------------------\n"
         + "Podsumowanie wprowadzonych danych\n\n"
         + "Model: %s\n", name);
@@ -173,24 +169,24 @@ public class CarsProject {
         if(txtName == inputName || inputName == 4){
             if(price >= prices[0] && price <= prices[1] && prices[0] != 0 &&
                mileage >= mileages[0] && mileage <= mileages[1] && mileages[0] != 0)
-                    System.out.println(model + " " + price +" PLN " + mileage + "km");
+                printOut(brand, model, year, price, mileage);
             
             else if(prices[0] == 0 && mileage >= mileages[0] && mileage <= mileages[1] && mileages[0] != 0)
-                    System.out.println(model + " " + price +" PLN " + mileage + "km");
+                printOut(brand, model, year, price, mileage);
             
             else if(mileages[0] == 0 && price >= prices[0] && price <= prices[1] && prices[0] != 0)
-                System.out.println(model + " " + price +" PLN " + mileage + "km");
+                printOut(brand, model, year, price, mileage);
 
             else if(mileages[0] == 0 && prices[0] == 0)
                 //System.out.println(model + " " + price +" PLN " + mileage + "km");
                 printOut(brand, model, year, price, mileage);
         }
     }  
-    public static void readFile(String f, int inModel, int prices[], int mileages[]) throws IOException{
+    public static void readFile(String file, int inModel, int prices[], int mileages[]) throws IOException{
         BufferedReader in = null;
         String row;
         try{
-            in = new BufferedReader(new FileReader(f));
+            in = new BufferedReader(new FileReader(file));
             
             while((row = in.readLine())!= null){
                 ifCondition(row, inModel, prices, mileages);
@@ -208,10 +204,9 @@ public class CarsProject {
     }
     public static void main(String[] args) throws IOException {
         int inModel = userInputModel();
-        //String inModelName = convertModel(inModel);
         int prices[] = userInputPriceRange();
         int mileages[] = userInputMilRange();
-        //summary(inModelName, prices, mileages);
+        summary(inModel, prices, mileages);
         System.out.printf("+------------+----------+----------+---------- +----------+\n");
         System.out.printf("| Marka      | Model    | Rok prod | Cena      | Przebieg |\n");
         System.out.printf("+------------+----------+----------+---------- +----------+\n");
