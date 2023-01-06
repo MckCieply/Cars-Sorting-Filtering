@@ -7,10 +7,6 @@ package carsproject;
 import java.io.*;
 import java.util.Scanner;
 
-//Project tasks
-//Using db or csv file
-//Use ifs and queries to properly show selected cars from menu
-//ex. take from user model, price range, mileage range and show deals
 public class CarsProject {
     
     static Scanner scann = new Scanner(System.in);
@@ -30,14 +26,14 @@ public class CarsProject {
                 inModel = scann.nextInt();
                 //Sprawdzanie czy liczba odpowiada pozycji w menu
                 if (!(inModel > 0 && inModel < 5)){
-                    System.out.println("Cos sie nie zgadza, sprobuj jeszcze raz \n"
-                            + "Pamietaj, nalezy podac liczbe odpowiadajacej pozycji w menu");
+                    System.out.println("Zostala wprowadzona zla liczba. \n"
+                            + " Sprobuj jeszcze raz.\n");
                 }
             }
             // catch jak wprowadzil znak inny od cyfry oraz czyszczenie \n uzywajac nextLine
             catch(java.util.InputMismatchException e){
-                System.out.print("Podany zostal znak inny niz liczba\n"
-                        + "Prosze podac liczbe\n");
+                System.out.print("Zostal wprowadzony znak inny niz liczba. \n"
+                            + "Sprobuj jeszcze raz.\n");
                 scann.nextLine();
             }
         }
@@ -63,7 +59,7 @@ public class CarsProject {
                     priceTo = scann.nextInt();
                     //Sprawdzenie czy jest poprawny zakres
                     if (priceTo < priceFrom){
-                        System.out.print("Niepoprawny przedzial cenowy\n");
+                        System.out.print("Niepoprawny przedzial cenowy.\n Sprobuj jeszcze raz.\n");
                         priceFrom = -1;
                     }
                     else{
@@ -78,8 +74,8 @@ public class CarsProject {
             }
             //catch jak nie jest to cyfra, i czyszczenie \n z wejścia
         catch(java.util.InputMismatchException e){
-            System.out.print("Podany zostal znak inny niz liczba\n "
-                    + "Prosze podac liczbe\n");
+            System.out.print("Zostal wprowadzony znak inny niz liczba. \n"
+                            + "Sprobuj jeszcze raz.\n");
             scann.nextLine();
             // Przypisywanie -1 obu zmiennym zeby przy drugim podejsciu nie czytalo starych danych
             // -1 jest nasza wartoscia domyslna, poniewaz 0 ma zastosowanie w programie
@@ -105,7 +101,7 @@ public class CarsProject {
                     mileages[1] = mileageTo;
                     //Sprawdzanie czy zakres jest poprawny
                     if (mileageTo < mileageFrom){
-                        System.out.print("Niepoprawny przedzial przebiegu\n");
+                        System.out.print("Niepoprawny przedzial przebiegu.\n Sprobuj jeszcze raz.\n");
                         mileageFrom = -1;
                     }
                 }
@@ -118,8 +114,8 @@ public class CarsProject {
             //Catch dla wprowadzonego znaku innego niz liczba oraz przypisane wartosci
             //gwarantujacej kolejny przebieg
             catch(java.util.InputMismatchException e){
-                System.out.print("Podany zostal znak inny niz liczba\n"
-                        + "Prosze podac liczbe\n");
+                System.out.print("Zostal wprowadzony znak inny niz liczba. \n"
+                            + "Sprobuj jeszcze raz.\n");
                 scann.nextLine();
                 mileageFrom = mileageTo = -1;
             }
