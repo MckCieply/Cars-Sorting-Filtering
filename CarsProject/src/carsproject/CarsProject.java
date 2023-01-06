@@ -27,7 +27,7 @@ public class CarsProject {
                 //Sprawdzanie czy liczba odpowiada pozycji w menu
                 if (!(inModel > 0 && inModel < 5)){
                     System.out.println("Zostala wprowadzona zla liczba. \n"
-                            + " Sprobuj jeszcze raz.\n");
+                            + "Sprobuj jeszcze raz.\n");
                 }
             }
             // catch jak wprowadzil znak inny od cyfry oraz czyszczenie \n uzywajac nextLine
@@ -45,9 +45,7 @@ public class CarsProject {
     public static int[] userInputPriceRange(){
         int priceFrom = -1, priceTo;
         int prices[] = new int [2];
-        System.out.print("Interesuja mnie modele... \n"
-                + "Jeśli jest to nieistotne prosze wpisać 0\n"
-                + "w zasiegu cenowym \n");
+        System.out.print("Jesli cena nie gra roli, prosze podac 0\nCena...\n");
         do{
             //Sprawdzanie czy uzytkownik wprowadzil poprawne dane
             System.out.print("Od: \n>>> ");
@@ -88,7 +86,7 @@ public class CarsProject {
     public static int[] userInputMilRange(){
         int mileageFrom ,mileageTo;
         int mileages[] = new int [2];
-        System.out.print("Z przebiegiem...\n");
+        System.out.print("Jesli przebieg nie gra roli, prosze podac 0\nZ przebiegiem...\n");
         do{
             //Sprawdzanie czy uzytkownik wprowadzil poprawne dane
             System.out.print("Od: \n>>> ");
@@ -145,6 +143,12 @@ public class CarsProject {
         else
             System.out.printf("Przebieg: %dkm - %dkm\n", mileages[0], mileages[1]);
         System.out.print("-------------------------------\n");
+        String wait;
+        do{
+            scann.nextLine();
+            System.out.print("Press enter to continue...\n");
+            wait = scann.nextLine();
+        }while(wait.equals("\n"));
     }
     public static void ifCondition(String row,  int inputName, int prices[], int mileages[]){
         String elements[] = row.split(",");
