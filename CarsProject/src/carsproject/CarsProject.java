@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class CarsProject {
     
     static Scanner scann = new Scanner(System.in);
-    public static void menu(){
+    public static void menu()throws IOException{
         System.out.print("Prosze wybrac operacje: \n 1. Zmienic dane ogloszenia. \n2. Wyszukac ogloszenia.\n>>>");
         int choice = scann.nextInt();
         do{
@@ -31,9 +31,29 @@ public class CarsProject {
                             + "Sprobuj jeszcze raz.\n");
                 scann.nextLine();
             }
+            if(choice == 1){
+                
+            }
+            else if(choice == 2){
+                int inModel = userInputModel();
+                int prices[] = userInputPriceRange();
+                int mileages[] = userInputMilRange();
+                summary(inModel, prices, mileages);
+                System.out.printf("+------------+----------+----------+---------- +----------+\n");
+                System.out.printf("| Marka      | Model    | Rok prod | Cena      | Przebieg |\n");
+                System.out.printf("+------------+----------+----------+---------- +----------+\n");
+                readFile("cars.txt", inModel, prices, mileages);
+                System.out.printf("+------------+----------+----------+-----------+----------+\n");
+            }
         }
         //Wykonywanie az uzytkownik nie poda 1 lub 2
         while(!(choice > 0 && choice < 3));
+    }
+    //Funkcja do edycji jednego ogloszenia
+    public static void edit(){
+        System.out.print("Prosze podac ID ogloszenia do edycji: ");
+        int givenID = scann.nextInt();
+        
     }
     //Pytanie jakie modele wyswietlic
     public static int userInputModel(){
@@ -228,14 +248,6 @@ public class CarsProject {
         System.out.printf(format, brand, model, year, price, mileage);
     }
     public static void main(String[] args) throws IOException {
-        int inModel = userInputModel();
-        int prices[] = userInputPriceRange();
-        int mileages[] = userInputMilRange();
-        summary(inModel, prices, mileages);
-        System.out.printf("+------------+----------+----------+---------- +----------+\n");
-        System.out.printf("| Marka      | Model    | Rok prod | Cena      | Przebieg |\n");
-        System.out.printf("+------------+----------+----------+---------- +----------+\n");
-        readFile("cars.txt", inModel, prices, mileages);
-        System.out.printf("+------------+----------+----------+-----------+----------+\n");
+        menu();
         }
     }
