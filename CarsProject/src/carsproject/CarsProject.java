@@ -10,6 +10,31 @@ import java.util.Scanner;
 public class CarsProject {
     
     static Scanner scann = new Scanner(System.in);
+    public static void menu(){
+        System.out.print("Prosze wybrac operacje: \n 1. Zmienic dane ogloszenia. \n2. Wyszukac ogloszenia.\n>>>");
+        int choice = scann.nextInt();
+        do{
+            System.out.print(">>> ");
+            // Sprawdzanie czy uzytkownik wprowadzil poprawne dane
+            // try czy wprowadzil cyfre
+            try{ 
+                System.out.print(">>> ");;
+                //Sprawdzanie czy liczba odpowiada pozycji w menu
+                if (!(choice > 0 && choice < 3)){
+                    System.out.println("Zostala wprowadzona zla liczba. \n"
+                            + "Sprobuj jeszcze raz.\n");
+                }
+            }
+            // catch jak wprowadzil znak inny od cyfry oraz czyszczenie \n uzywajac nextLine
+            catch(java.util.InputMismatchException e){
+                System.out.print("Zostal wprowadzony znak inny niz liczba. \n"
+                            + "Sprobuj jeszcze raz.\n");
+                scann.nextLine();
+            }
+        }
+        //Wykonywanie az uzytkownik nie poda 1 lub 2
+        while(!(choice > 0 && choice < 3));
+    }
     //Pytanie jakie modele wyswietlic
     public static int userInputModel(){
         int inModel = 0;
