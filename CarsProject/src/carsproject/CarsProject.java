@@ -70,6 +70,16 @@ public class CarsProject {
         }
         reader.close();
         writer.close();
+        replace();
+    }
+    public static void replace(){
+        File cars = new File("cars.txt");
+        File temp = new File("temp.txt");
+        cars.delete();
+        boolean flag = temp.renameTo(cars);
+        //cars.deleteOnExit();
+        if (flag == true)
+            System.out.print("Success");
     }
     //Pytanie jakie modele wyswietlic
     public static int userInputModel(){
