@@ -38,11 +38,11 @@ public class CarsProject {
                 int prices[] = userInputPriceRange();
                 int mileages[] = userInputMilRange();
                 summary(inModel, prices, mileages);
-                System.out.printf("+------------+----------+----------+---------- +----------+\n");
-                System.out.printf("| Marka      | Model    | Rok prod | Cena      | Przebieg |\n");
-                System.out.printf("+------------+----------+----------+---------- +----------+\n");
+                System.out.printf("+------------+------------+----------+----------+-----------+----------+\n");
+                System.out.printf("| ID         | Marka      | Model    | Rok prod | Cena      | Przebieg |\n");
+                System.out.printf("+------------+------------+----------+----------+-----------+----------+\n");
                 readFile("cars.txt", inModel, prices, mileages);
-                System.out.printf("+------------+----------+----------+-----------+----------+\n");
+                System.out.printf("+------------+------------+----------+----------+-----------+----------+\n");
             }
         }
         //Wykonywanie az uzytkownik nie poda 1 lub 2
@@ -226,7 +226,7 @@ public class CarsProject {
     }
     public static void ifCondition(String row,  int inputName, int prices[], int mileages[]){
         String elements[] = row.split(",");
-        //int id = Integer.parseInt(elements[0]);
+        long id = Long.parseLong(elements[0]);
         String brand = elements[1];
         String model = elements[2];
         int txtName = 0;
@@ -243,17 +243,17 @@ public class CarsProject {
         if(txtName == inputName || inputName == 4){
             if(price >= prices[0] && price <= prices[1] && prices[0] != 0 &&
                mileage >= mileages[0] && mileage <= mileages[1] && mileages[0] != 0)
-                printOut(brand, model, year, price, mileage);
+                printOut(id,brand, model, year, price, mileage);
             
             else if(prices[0] == 0 && mileage >= mileages[0] && mileage <= mileages[1] && mileages[0] != 0)
-                printOut(brand, model, year, price, mileage);
+                printOut(id, brand, model, year, price, mileage);
             
             else if(mileages[0] == 0 && price >= prices[0] && price <= prices[1] && prices[0] != 0)
-                printOut(brand, model, year, price, mileage);
+                printOut(id, brand, model, year, price, mileage);
 
             else if(mileages[0] == 0 && prices[0] == 0)
                 //System.out.println(model + " " + price +" PLN " + mileage + "km");
-                printOut(brand, model, year, price, mileage);
+                printOut(id, brand, model, year, price, mileage);
         }
     }  
     public static void readFile(String file, int inModel, int prices[], int mileages[]) throws IOException{
@@ -271,10 +271,10 @@ public class CarsProject {
                 in.close();
         }
     }
-    public static void printOut(String brand, String model, int year, int price, int mileage){
-        String format = "| %-11s| %-9s| %-9d| %-6dPLN | %-6dkm |\n";
+    public static void printOut(long id, String brand, String model, int year, int price, int mileage){
+        String format = "| %-10d | %-11s| %-9s| %-9d| %-6dPLN | %-6dkm |\n";
         //Brand min. 12 places, Model min 8 places, year 4, price 6places + PLN, mileage 6places +km
-        System.out.printf(format, brand, model, year, price, mileage);
+        System.out.printf(format,id, brand, model, year, price, mileage);
     }
     public static void main(String[] args) throws IOException {
         menu();
