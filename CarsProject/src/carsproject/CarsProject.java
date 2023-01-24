@@ -14,11 +14,10 @@ public class CarsProject {
         System.out.print("Prosze wybrac operacje: \n 1. Zmienic dane ogloszenia. \n2. Wyszukac ogloszenia.\n>>>");
         int choice = scann.nextInt();
         do{
-            System.out.print(">>> ");
             // Sprawdzanie czy uzytkownik wprowadzil poprawne dane
             // try czy wprowadzil cyfre
             try{ 
-                System.out.print(">>> ");;
+                System.out.print(">>> ");
                 //Sprawdzanie czy liczba odpowiada pozycji w menu
                 if (!(choice > 0 && choice < 3)){
                     System.out.println("Zostala wprowadzona zla liczba. \n"
@@ -32,7 +31,7 @@ public class CarsProject {
                 scann.nextLine();
             }
             if(choice == 1){
-                
+                edit();
             }
             else if(choice == 2){
                 int inModel = userInputModel();
@@ -50,10 +49,19 @@ public class CarsProject {
         while(!(choice > 0 && choice < 3));
     }
     //Funkcja do edycji jednego ogloszenia
-    public static void edit(){
+    public static void edit() throws IOException{
         System.out.print("Prosze podac ID ogloszenia do edycji: ");
-        int givenID = scann.nextInt();
-        
+        long givenID = scann.nextLong();   //6103819587
+        BufferedReader reader = new BufferedReader(new FileReader("cars.txt"));
+        String row;
+        while((row = reader.readLine())!= null){
+            String[] elements = row.split(",");
+            if (Long.parseLong(elements[0]) == givenID){
+                for(String element:elements)
+                    System.out.print(element);
+            }
+        }
+        reader.close();
     }
     //Pytanie jakie modele wyswietlic
     public static int userInputModel(){
