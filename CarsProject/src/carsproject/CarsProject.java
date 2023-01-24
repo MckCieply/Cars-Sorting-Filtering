@@ -61,9 +61,11 @@ public class CarsProject {
         String row;
         while((row = reader.readLine())!= null){
             String[] elements = row.split(",");
+            // if do modyfikacji oferty
             if (Long.parseLong(elements[0]) == givenID){
                 writer.write(elements[0]+","+elements[1]+","+elements[2]+","+givenPrice+","+elements[4]+","+givenMileage+"\n");
             }
+            // else do przepisania calej reszty
             else{
                 writer.write(row+"\n");
             }
@@ -72,6 +74,7 @@ public class CarsProject {
         writer.close();
         replace();
     }
+    //funkcja do zamiany starego pliku na plik po zmianie
     public static void replace(){
         File cars = new File("cars.txt");
         File temp = new File("temp.txt");
