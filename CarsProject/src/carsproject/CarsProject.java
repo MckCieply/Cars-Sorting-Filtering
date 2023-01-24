@@ -11,7 +11,7 @@ public class CarsProject {
     
     static Scanner scann = new Scanner(System.in);
     public static void menu()throws IOException{
-        System.out.print("Prosze wybrac operacje: \n 1. Zmienic dane ogloszenia. \n2. Wyszukac ogloszenia.\n>>>");
+        System.out.print("Prosze wybrac operacje: \n1. Zmienic dane ogloszenia. \n2. Wyszukac ogloszenia.\n>>> ");
         int choice = scann.nextInt();
         do{
             // Sprawdzanie czy uzytkownik wprowadzil poprawne dane
@@ -50,11 +50,11 @@ public class CarsProject {
     }
     //Funkcja do edycji jednego ogloszenia
     public static void edit() throws IOException{
-        System.out.print("Prosze podac ID ogloszenia do edycji: \n >>> ");
+        System.out.print("Prosze podac ID ogloszenia do edycji: \n>>> ");
         long givenID = scann.nextLong();   //6103819587
-        System.out.print("Prosze podac nowy przebieg: \n >>>");
+        System.out.print("Prosze podac nowy przebieg: \n>>> ");
         long givenMileage = scann.nextLong();
-        System.out.print("Prosze podac nowa cene: \n >>>");
+        System.out.print("Prosze podac nowa cene: \n>>> ");
         long givenPrice = scann.nextLong();
         BufferedReader reader = new BufferedReader(new FileReader("cars.txt"));
         BufferedWriter writer = new BufferedWriter(new FileWriter("temp.txt"));
