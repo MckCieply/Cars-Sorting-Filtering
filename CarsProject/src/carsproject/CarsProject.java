@@ -50,18 +50,26 @@ public class CarsProject {
     }
     //Funkcja do edycji jednego ogloszenia
     public static void edit() throws IOException{
-        System.out.print("Prosze podac ID ogloszenia do edycji: ");
+        System.out.print("Prosze podac ID ogloszenia do edycji: \n >>> ");
         long givenID = scann.nextLong();   //6103819587
+        System.out.print("Prosze podac nowy przebieg: \n >>>");
+        long givenMileage = scann.nextLong();
+        System.out.print("Prosze podac nowa cene: \n >>>");
+        long givenPrice = scann.nextLong();
         BufferedReader reader = new BufferedReader(new FileReader("cars.txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("temp.txt"));
         String row;
         while((row = reader.readLine())!= null){
             String[] elements = row.split(",");
             if (Long.parseLong(elements[0]) == givenID){
-                for(String element:elements)
-                    System.out.print(element);
+                writer.write(elements[0]+","+elements[1]+","+elements[2]+","+givenPrice+","+elements[4]+","+givenMileage+"\n");
+            }
+            else{
+                writer.write(row+"\n");
             }
         }
         reader.close();
+        writer.close();
     }
     //Pytanie jakie modele wyswietlic
     public static int userInputModel(){
