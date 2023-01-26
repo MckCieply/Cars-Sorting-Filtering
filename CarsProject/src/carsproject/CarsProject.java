@@ -18,7 +18,7 @@ public class CarsProject {
             // try czy wprowadzil cyfre
             try{ 
                 System.out.print(">>> ");
-                //Sprawdzanie czy liczba odpowiada pozycji w menu
+                // Sprawdzanie czy liczba odpowiada pozycji w menu
                 if (!(choice > 0 && choice < 3)){
                     System.out.println("Zostala wprowadzona zla liczba. \n"
                             + "Sprobuj jeszcze raz.\n");
@@ -48,7 +48,7 @@ public class CarsProject {
         //Wykonywanie az uzytkownik nie poda 1 lub 2
         while(!(choice > 0 && choice < 3));
     }
-    //Funkcja do edycji jednego ogloszenia
+    // Funkcja do edycji jednego ogloszenia
     public static void edit() throws IOException{
         System.out.print("Prosze podac ID ogloszenia do edycji: \n>>> ");
         long givenID = scann.nextLong();   //6103819587
@@ -74,17 +74,16 @@ public class CarsProject {
         writer.close();
         replace();
     }
-    //funkcja do zamiany starego pliku na plik po zmianie
+    // Funkcja do zamiany starego pliku na plik po zmianie
     public static void replace(){
         File cars = new File("cars.txt");
         File temp = new File("temp.txt");
         cars.delete();
         boolean flag = temp.renameTo(cars);
-        //cars.deleteOnExit();
         if (flag == true)
             System.out.print("Success");
     }
-    //Pytanie jakie modele wyswietlic
+    // Pytanie jakie modele wyswietlic
     public static int userInputModel(){
         int inModel = 0;
         System.out.print("Wybierz na podstawie jakiego modelu szukasz danych:\n"
@@ -115,7 +114,7 @@ public class CarsProject {
         while(!(inModel > 0 && inModel < 5));
         return inModel;
     }
-    //Pytanie o zakres cenowy modeli
+    // Pytanie o zakres cenowy modeli
     public static int[] userInputPriceRange(){
         int priceFrom = -1, priceTo;
         int prices[] = new int [2];
@@ -156,7 +155,7 @@ public class CarsProject {
         }while(!(priceFrom >= 0));
         return prices;
     }
-    //Pytanie o zakres przebiegu modeli
+    // Pytanie o zakres przebiegu modeli
     public static int[] userInputMilRange(){
         int mileageFrom ,mileageTo;
         int mileages[] = new int [2];
@@ -224,6 +223,7 @@ public class CarsProject {
             wait = scann.nextLine();
         }while(wait.equals("\n"));
     }
+    // Sprawdzanie czy dana oferta spelnia wymagania
     public static void ifCondition(String row,  int inputName, int prices[], int mileages[]){
         String elements[] = row.split(",");
         long id = Long.parseLong(elements[0]);
@@ -256,6 +256,7 @@ public class CarsProject {
                 printOut(id, brand, model, year, price, mileage);
         }
     }  
+    // Czytanie pliku
     public static void readFile(String file, int inModel, int prices[], int mileages[]) throws IOException{
         BufferedReader in = null;
         String row;
@@ -271,9 +272,10 @@ public class CarsProject {
                 in.close();
         }
     }
+    // Wypisywanie na konsole z formatowaniem
     public static void printOut(long id, String brand, String model, int year, int price, int mileage){
         String format = "| %-10d | %-11s| %-9s| %-9d| %-6dPLN | %-6dkm |\n";
-        //Brand min. 12 places, Model min 8 places, year 4, price 6places + PLN, mileage 6places +km
+        // ID, Brand min. 12 places, Model min 8 places, year 4, price 6places + PLN, mileage 6places +km
         System.out.printf(format,id, brand, model, year, price, mileage);
     }
     public static void main(String[] args) throws IOException {
