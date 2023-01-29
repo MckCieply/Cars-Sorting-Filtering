@@ -1,4 +1,4 @@
-//Program pracuje na pliku tekstowym w ktorym z wierszach sa dane, pooddzielane przecinkami
+//Program pracuje na pliku tekstowym w ktorym w wierszach sa dane, rozdzielone przecinkami
 //Dane zostaly skonwertowane z bazy danych w sqlite3 do pliku txt
 //Data powstania: 27.12.2022
 //Autor: 
@@ -157,7 +157,7 @@ public class CarsProject {
     }
     // Pytanie o zakres przebiegu modeli
     public static int[] userInputMilRange(){
-        int mileageFrom ,mileageTo;
+        int mileageFrom, mileageTo;
         int mileages[] = new int [2];
         System.out.print("Jesli przebieg nie gra roli, prosze podac 0\nZ przebiegiem...\n");
         do{
@@ -193,7 +193,7 @@ public class CarsProject {
         }while(!(mileageFrom >= 0));
         return mileages;
     }
-    // Metoda wezmie model, zakres cenowy oraz zakres przebiegu do wyswietlenia
+    // Metoda wezmie model, zakres cenowy oraz zakres przebiegu do wyswietlenia podsumowania
     public static void summary(int model, int prices[], int mileages[]){
         String name;
         if(model == 1)
@@ -262,7 +262,7 @@ public class CarsProject {
         String row;
         try{
             in = new BufferedReader(new FileReader(file));
-            
+            //Czytanie dopoki nastepny wiersz nie jest pusty
             while((row = in.readLine())!= null){
                 ifCondition(row, inModel, prices, mileages);
             }
