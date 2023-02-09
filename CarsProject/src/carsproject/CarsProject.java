@@ -284,7 +284,8 @@ public class CarsProject {
     }
     // Wypisywanie na konsole z formatowaniem
     public static void printOut(long id, String brand, String model, int year, int price, int mileage){
-        String format = "| %-10d | %-11s| %-9s| %-9d| %-6dPLN | %-6dkm |\n";
+        
+        String format = "| %-10d | %-11s| %-9s| %-9d| %6dPLN | %6dkm |\n";
         // ID, Brand min. 12 places, Model min 8 places, year 4, price 6places + PLN, mileage 6places +km
         System.out.printf(format,id, brand, model, year, price, mileage);
     }
