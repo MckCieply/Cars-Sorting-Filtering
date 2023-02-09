@@ -1,7 +1,7 @@
 //Program pracuje na pliku tekstowym w ktorym w wierszach sa dane, rozdzielone przecinkami
 //Dane zostaly skonwertowane z bazy danych w sqlite3 do pliku txt
 //Data powstania: 27.12.2022
-//Autor: 
+//Autor: Aleksander Torka
 package carsproject;
 
 import java.io.*;
@@ -11,7 +11,7 @@ public class CarsProject {
     
     static Scanner scann = new Scanner(System.in);
     public static void menu()throws IOException{
-        System.out.print("Prosze wybrac operacje: \n1. Zmienic dane ogloszenia. \n2. Wyszukac ogloszenia.\n>>> ");
+        System.out.print("Prosze wybrac operacje: \n1. Zmienic dane ogloszenia. \n2. Wyszukac ogloszenia.\n3. Koniec \n>>> ");
         int choice = scann.nextInt();
         do{
             // Sprawdzanie czy uzytkownik wprowadzil poprawne dane
@@ -31,7 +31,7 @@ public class CarsProject {
                 scann.nextLine();
             }
             if(choice == 1){
-                edit();
+               edit();
             }
             else if(choice == 2){
                 int inModel = userInputModel();
@@ -44,9 +44,14 @@ public class CarsProject {
                 readFile("cars.txt", inModel, prices, mileages);
                 System.out.printf("+------------+------------+----------+----------+-----------+----------+\n");
             }
+            else if(choice == 3){
+                System.out.print("Zamykanie ...");
+                break;
+            }
+            menu();
         }
-        //Wykonywanie az uzytkownik nie poda 1 lub 2
-        while(!(choice > 0 && choice < 3));
+        //Wykonywanie az uzytkownik nie poda 1 lub 2 lub 3
+        while(!(choice > 0 && choice < 4));
     }
     // Funkcja do edycji jednego ogloszenia
     public static void edit() throws IOException{
@@ -268,8 +273,14 @@ public class CarsProject {
             }
         } 
         finally{
-            if(in != null) 
+            if(in != null){
                 in.close();
+                String wait;
+                do{
+                    System.out.print("Press enter to continue...\n");
+                    wait = scann.nextLine();
+                }while(wait.equals("\n"));
+            }
         }
     }
     // Wypisywanie na konsole z formatowaniem
