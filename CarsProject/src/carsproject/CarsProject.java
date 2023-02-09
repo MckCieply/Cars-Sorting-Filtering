@@ -48,6 +48,11 @@ public class CarsProject {
                 System.out.print("Zamykanie ...");
                 break;
             }
+            String wait;
+            do{
+                System.out.print("Wcisnij enter aby kontynuowac...\n");
+                wait = scann.nextLine();
+            }while(wait.equals("\n"));
             menu();
         }
         //Wykonywanie az uzytkownik nie poda 1 lub 2 lub 3
@@ -273,14 +278,8 @@ public class CarsProject {
             }
         } 
         finally{
-            if(in != null){
-                in.close();
-                String wait;
-                do{
-                    System.out.print("Press enter to continue...\n");
-                    wait = scann.nextLine();
-                }while(wait.equals("\n"));
-            }
+            if(in != null)
+                in.close();         
         }
     }
     // Wypisywanie na konsole z formatowaniem
